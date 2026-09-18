@@ -1,0 +1,46 @@
+.live-chart {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+.live-chart__header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.live-chart__header h3 {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.live-chart__count {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.live-chart__canvas-wrap {
+  flex: 1;
+  min-height: 160px;
+  position: relative;
+}
+
+.live-chart__canvas-wrap canvas {
+  position: absolute;
+  inset: 0;
+}
+
+.live-chart__empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
