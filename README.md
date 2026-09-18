@@ -80,7 +80,7 @@ VITE_STREAM_WS_URL=wss://your-endpoint.example.com/stream
 - **No `dangerouslySetInnerHTML` anywhere.** All stream-derived text (service name, message) is rendered as ordinary JSX children, so React's default escaping applies. A dedicated test (`EventsList.test.tsx`) asserts that a payload containing `<script>`/`<img onerror>` renders as inert text and never becomes a real DOM element.
 - **No secrets in the client.** There are no hardcoded API keys or tokens anywhere in the source. `services/authToken.ts` holds the auth token in a module-scoped variable only (never `localStorage`/cookies, which are readable by any script on the page, including an XSS payload) and it is never logged or placed in a URL/query string — `WebSocketStreamClient` sends it as the first application message after the socket opens instead.
 - **Resilient, bounded reconnection.** Both stream clients use exponential backoff with jitter (`computeBackoffDelay`), capped at a max delay, so a flapping connection retries with decreasing frequency instead of hammering the server or spinning the UI. Combined with the bounded buffers above, neither a flood of valid data nor a flapping connection can grow memory unbounded or hang the app.
-- **No sensitive detail in logs.** The one `console.debug` in the codebase (in `useLiveStream`, dev-only) logs *why* a message was rejected, never the payload itself. Socket error events are never logged directly, since they can carry connection/auth detail.
+- **No sensitive detail in logs.** The one `console.debug` in the codebase (in `useLiveStream`, dev-only) logs _why_ a message was rejected, never the payload itself. Socket error events are never logged directly, since they can carry connection/auth detail.
 
 ## Edge cases covered
 
